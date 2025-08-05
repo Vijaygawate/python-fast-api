@@ -8,7 +8,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: 'dpr-test-app' # Set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.' # Set this to the path to your web app project, defaults to the repository root
-  STARTUP_COMMAND: 'uvicorn main:app --host 0.0.0.0 --port 8000'
+  STARTUP_COMMAND: 'python -m uvicorn main:app --host 0.0.0.0'
 
 jobs:
   build:
@@ -33,7 +33,7 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-        #startup-command: ${{ env.STARTUP_COMMAND }}
+        startup-command: ${{ env.STARTUP_COMMAND }}
     - name: logout
       run: |
         az logout
